@@ -11,13 +11,11 @@ public class MovingPlatform : MonoBehaviour
     private bool movingToEndPos = true;
     private int waitTimer = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         startPos = this.transform.position;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (movingToEndPos)
@@ -30,7 +28,11 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    void MovePlatform(Vector3 position)
+    /// <summary>
+    /// Moves the platform to a given position at a speed specified in the editor and then makes the platform delay before moving again.
+    /// </summary>
+    /// <param name="position">A <see cref="Vector3"/> position in world to move to, specified in the editor.</param>
+    private void MovePlatform(Vector3 position)
     {
         var distanceToPos = Vector3.Distance(position, this.transform.position);
 
@@ -53,7 +55,13 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    Vector3 GetTranslateAmount(Vector3 currentPosition, Vector3 goalPosition)
+    /// <summary>
+    /// Basically lerp but with functionality to adjust movement amount based on which axis need movement.
+    /// </summary>
+    /// <param name="currentPosition">The position of this gameobject currently.</param>
+    /// <param name="goalPosition">The position we want the gameobject to move to.</param>
+    /// <returns>A <see cref="Vector3"/> that contains the distance to travel along each axis.</returns>
+    private Vector3 GetTranslateAmount(Vector3 currentPosition, Vector3 goalPosition)
     {
         var movementAmountPerAxis = 1f;
         var totalX = 0f;

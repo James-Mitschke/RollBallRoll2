@@ -8,7 +8,6 @@ public class CameraBehaviour : MonoBehaviour
     private GameObject player;
     private Vector3 velocity;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!player)
@@ -20,10 +19,19 @@ public class CameraBehaviour : MonoBehaviour
         offset = transform.position - player.transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position + offset); 
+        // Handled in Update as no physics to break.
+        MoveCamera();
+    }
+
+    /// <summary>
+    /// A method to move the camera to follow the player.
+    /// TODO: Add camera rotation on the y axis to allow the player to look around.
+    /// </summary>
+    private void MoveCamera()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position + offset);
 
         if (distanceToPlayer > 1)
         {

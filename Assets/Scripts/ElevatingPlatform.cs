@@ -12,16 +12,15 @@ public class ElevatingPlatform : MonoBehaviour
     private int timer = 0;
     private Vector3 startPos;
 
-    // Start is called before the first frame update
     void Start()
     {
         startPos = this.transform.position;
         currentlyAscending = isAscending;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        // TODO: Move this out into its own method, there's a lot of duplicate code here so would be good to abstract out into something that is re-usable.
         if (isAscending)
         {
             if (currentlyAscending && this.transform.position.y < startPos.y + maxDistance)
