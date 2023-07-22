@@ -1,3 +1,4 @@
+using Assets.Scripts.Platforms;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class MovingPlatform : MonoBehaviour
     public Vector3 endPos;
     public float movementSpeed = 1f;
     public int stopTimeInSeconds = 1;
+    public PlatformModel platformModel;
     private Vector3 startPos;
     private bool movingToEndPos = true;
     private int waitTimer = 0;
@@ -14,6 +16,7 @@ public class MovingPlatform : MonoBehaviour
     void Start()
     {
         startPos = this.transform.position;
+        platformModel = new PlatformModel(this.transform.position);
     }
 
     void FixedUpdate()
@@ -34,6 +37,8 @@ public class MovingPlatform : MonoBehaviour
     /// <param name="position">A <see cref="Vector3"/> position in world to move to, specified in the editor.</param>
     private void MovePlatform(Vector3 position)
     {
+        platformModel.CurrentPosition = this.transform.position;
+
         var distanceToPos = Vector3.Distance(position, this.transform.position);
 
         if (distanceToPos > 0.5f)
@@ -53,6 +58,8 @@ public class MovingPlatform : MonoBehaviour
                 waitTimer = 0;
             }
         }
+
+        platformModel.OldPosition = this.transform.position;
     }
 
     /// <summary>
@@ -101,5 +108,10 @@ public class MovingPlatform : MonoBehaviour
         return new Vector3(totalX * movementAmountPerAxis * movementSpeed * Time.deltaTime,
                 totalY * movementAmountPerAxis * movementSpeed * Time.deltaTime,
                 totalZ * movementAmountPerAxis * movementSpeed * Time.deltaTime);
+    }
+
+    public PlatformModel GetPlatformPositions()
+    {
+        return this.platformModel;
     }
 }

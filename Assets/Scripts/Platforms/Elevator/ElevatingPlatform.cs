@@ -1,3 +1,4 @@
+using Assets.Scripts.Platforms;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,18 +9,24 @@ public class ElevatingPlatform : MonoBehaviour
     public float maxDistance = 1f;
     public float movementSpeed = 1f;
     public int stopTimeInSeconds = 1;
+    public PlatformModel platformModel;
+
     private bool currentlyAscending = true;
     private int timer = 0;
     private Vector3 startPos;
 
     void Start()
     {
+        platformModel = new PlatformModel(this.transform.position);
+
         startPos = this.transform.position;
         currentlyAscending = isAscending;
     }
 
     void FixedUpdate()
     {
+        platformModel.CurrentPosition = this.transform.position;
+
         // TODO: Move this out into its own method, there's a lot of duplicate code here so would be good to abstract out into something that is re-usable.
         if (isAscending)
         {
@@ -67,6 +74,12 @@ public class ElevatingPlatform : MonoBehaviour
                 }
             }
         }
-        
+
+        platformModel.OldPosition = this.transform.position;
+    }
+
+    public PlatformModel GetPlatformPositions()
+    {
+        return this.platformModel;
     }
 }

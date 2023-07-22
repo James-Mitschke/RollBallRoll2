@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2321065722266098865}
   - component: {fileID: 2321065722266098870}
   - component: {fileID: 2321065722266098871}
-  - component: {fileID: 2321065722266098868}
+  - component: {fileID: 790997648}
   m_Layer: 6
   m_Name: Moving Platform
   m_TagString: Mover
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2321065722266098868
+--- !u!114 &790997648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,9 +107,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4696859976420530143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da97d65041b5731419713aa857784ff4, type: 3}
+  m_Script: {fileID: 11500000, guid: c913996ee3bada44aa353f2fa46969b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   endPos: {x: -30, y: 0, z: 0}
-  movementSpeed: 1
+  movementSpeed: 2
   stopTimeInSeconds: 5

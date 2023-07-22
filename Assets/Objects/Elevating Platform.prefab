@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5780932585430462724}
   - component: {fileID: 5780932585430462725}
   - component: {fileID: 5780932585430462726}
-  - component: {fileID: 5780932585430462722}
+  - component: {fileID: 565576862}
   m_Layer: 6
   m_Name: Elevating Platform
   m_TagString: Elevator
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5780932585430462722
+--- !u!114 &565576862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,10 +107,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4524526716299816452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e1318755481ae4e884bb15a9e1b256, type: 3}
+  m_Script: {fileID: 11500000, guid: 48bdb5164ce8e3143a45e353478e60e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAscending: 0
+  isAscending: 1
   maxDistance: 10
-  movementSpeed: 10
+  movementSpeed: 1
   stopTimeInSeconds: 5

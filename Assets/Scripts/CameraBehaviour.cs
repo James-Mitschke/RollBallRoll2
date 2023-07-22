@@ -1,28 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
 {
     private Vector3 offset;
     private GameObject player;
-    private Vector3 velocity;
+    private Camera thisCam;
+    private Vector3 oldPlayerGlobalPos;
+    private Vector3 playerGlobalPos;
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         if (!player)
         {
             player = GameObject.FindGameObjectWithTag("Player");
+            oldPlayerGlobalPos = playerGlobalPos;
         }
 
-        velocity = Vector3.zero;
+        if (!thisCam)
+        {
+            thisCam = gameObject.GetComponent<Camera>();
+        }
+
         offset = transform.position - player.transform.position;
     }
 
     void Update()
     {
+        playerGlobalPos = player.transform.position;
+
         // Handled in Update as no physics to break.
         MoveCamera();
+        RotateCamera();
+
+        oldPlayerGlobalPos = playerGlobalPos;
     }
 
     /// <summary>
@@ -31,11 +44,19 @@ public class CameraBehaviour : MonoBehaviour
     /// </summary>
     private void MoveCamera()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position + offset);
-
-        if (distanceToPlayer > 1)
+        if (oldPlayerGlobalPos != playerGlobalPos)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + offset, ref velocity, 0.4f);
+            var amountToMove = playerGlobalPos - oldPlayerGlobalPos;
+
+            this.transform.position += amountToMove;
         }
+    }
+
+    private void RotateCamera()
+    {
+        var mouseX = Input.GetAxis("Mouse X");
+        var rotatePoint = new Vector3(player.transform.position.x, player.transform.position.y + offset.y, player.transform.position.z);
+
+        transform.RotateAround(rotatePoint, Vector3.up, mouseX);
     }
 }
